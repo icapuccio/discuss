@@ -9,6 +9,12 @@ defmodule Discuss.AuthController do
     signin(conn, changeset)
   end
 
+  def signout(conn, _params) do
+    conn
+    |> configure_session(drop: true)
+    |> redirect(to: topic_path(conn, :index))
+  end
+
   # Private
 
   defp user_params(auth) do
@@ -24,7 +30,7 @@ defmodule Discuss.AuthController do
     case insert_or_update_user(changeset) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, "Successful login")
+        |> put_flash(:info, "Welcome back!")
         |> put_session(:user_id, user.id)
       {:error, _changeset} ->
         conn

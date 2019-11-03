@@ -11,3 +11,7 @@
   position: relative;
   margin-bottom: 30px;
 }
+
+a:link {
+  margin-left: 5px;
+}
